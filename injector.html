@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Chunky ZIP Injector (Meteor Compat)</title>
+  <style>
+    body{font-family:system-ui,Arial,sans-serif;background:#0d1117;color:#e6edf3;margin:0;padding:24px}
+    .card{max-width:860px;margin:0 auto;background:#161b22;border:1px solid #30363d;border-radius:12px;padding:20px}
+    h1{margin-top:0;font-size:1.35rem}
+    input,button{font-size:1rem}
+    button{margin-top:12px;background:#238636;color:#fff;border:0;border-radius:8px;padding:10px 14px;cursor:pointer}
+    button:disabled{opacity:.55;cursor:not-allowed}
+    #log{white-space:pre-wrap;background:#0b0f14;border:1px solid #30363d;border-radius:8px;padding:10px;min-height:140px;margin-top:12px}
+    code{background:#0b0f14;padding:2px 6px;border-radius:6px}
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Chunky ZIP → Injected HTML</h1>
+    <p>Upload <code>ChunkyClient.zip</code>. This tool extracts the HTML, injects Meteor-compat JavaScript right before the last <code>}));</code>, and downloads the injected HTML automatically.</p>
+    <input id="zipInput" type="file" accept=".zip,application/zip" />
+    <br>
+    <button id="injectBtn" disabled>Inject + Download HTML</button>
+    <div id="log"></div>
+  </div>
+<script>
+const METEOR_PAYLOAD = `(function(){const MeteorCompat={"name":"MeteorJS-Translated-Compat","mcVersion":"1.12.2","source":"meteor-client-master.zip","moduleCount":164,"modules":[{"id":"antianvil","name":"anti-anvil","className":"AntiAnvil","category":"combat","enabled":false,"config":{}},{"id":"antibed","name":"anti-bed","className":"AntiBed","category":"combat","enabled":false,"config":{}},{"id":"arrowdodge","name":"arrow-dodge","className":"ArrowDodge","category":"combat","enabled":false,"config":{}},{"id":"autoanvil","name":"auto-anvil","className":"AutoAnvil","category":"combat","enabled":false,"config":{}},{"id":"autoarmor","name":"auto-armor","className":"AutoArmor","category":"combat","enabled":false,"config":{}},{"id":"autocity","name":"auto-city","className":"AutoCity","category":"combat","enabled":false,"config":{}},{"id":"autoexp","name":"auto-exp","className":"AutoEXP","category":"combat","enabled":false,"config":{}},{"id":"autolog","name":"auto-log","className":"AutoLog","category":"combat","enabled":false,"config":{}},{"id":"autotrap","name":"auto-trap","className":"AutoTrap","category":"combat","enabled":false,"config":{}},{"id":"autoweapon","name":"auto-weapon","className":"AutoWeapon","category":"combat","enabled":false,"config":{}},{"id":"autoweb","name":"auto-web","className":"AutoWeb","category":"combat","enabled":false,"config":{}},{"id":"bedaura","name":"bed-aura","className":"BedAura","category":"combat","enabled":false,"config":{}},{"id":"bowaimbot","name":"bow-aimbot","className":"BowAimbot","category":"combat","enabled":false,"config":{}},{"id":"bowspam","name":"bow-spam","className":"BowSpam","category":"combat","enabled":false,"config":{}},{"id":"burrow","name":"burrow","className":"Burrow","category":"combat","enabled":false,"config":{}},{"id":"crystalaura","name":"crystal-aura","className":"CrystalAura","category":"combat","enabled":false,"config":{}},{"id":"offhand","name":"offhand","className":"Offhand","category":"combat","enabled":false,"config":{}},{"id":"quiver","name":"quiver","className":"Quiver","category":"combat","enabled":false,"config":{}},{"id":"selfanvil","name":"self-anvil","className":"SelfAnvil","category":"combat","enabled":false,"config":{}},{"id":"selftrap","name":"self-trap","className":"SelfTrap","category":"combat","enabled":false,"config":{}},{"id":"selfweb","name":"self-web","className":"SelfWeb","category":"combat","enabled":false,"config":{}},{"id":"surround","name":"surround","className":"Surround","category":"combat","enabled":false,"config":{}},{"id":"swarmconnection","name":"Swarm Connection","className":"SwarmConnection","category":"misc","enabled":false,"config":{}},{"id":"swarmhost","name":"Swarm Host","className":"SwarmHost","category":"misc","enabled":false,"config":{}},{"id":"swarmworker","name":"Swarm Worker","className":"SwarmWorker","category":"misc","enabled":false,"config":{}},{"id":"antipacketkick","name":"anti-packet-kick","className":"AntiPacketKick","category":"misc","enabled":false,"config":{}},{"id":"autoreconnect","name":"auto-reconnect","className":"AutoReconnect","category":"misc","enabled":false,"config":{}},{"id":"betterbeacons","name":"better-beacons","className":"BetterBeacons","category":"misc","enabled":false,"config":{}},{"id":"betterchat","name":"better-chat","className":"BetterChat","category":"misc","enabled":false,"config":{}},{"id":"bookbot","name":"book-bot","className":"BookBot","category":"misc","enabled":false,"config":{}},{"id":"discordpresence","name":"discord-presence","className":"DiscordPresence","category":"misc","enabled":false,"config":{}},{"id":"inventorytweaks","name":"inventory-tweaks","className":"InventoryTweaks","category":"misc","enabled":false,"config":{}},{"id":"messageaura","name":"message-aura","className":"MessageAura","category":"misc","enabled":false,"config":{}},{"id":"notebot","name":"notebot","className":"Notebot","category":"misc","enabled":false,"config":{}},{"id":"notifier","name":"notifier","className":"Notifier","category":"misc","enabled":false,"config":{}},{"id":"packetcanceller","name":"packet-canceller","className":"PacketCanceller","category":"misc","enabled":false,"config":{}},{"id":"packetlogger","name":"packet-logger","className":"PacketLogger","category":"misc","enabled":false,"config":{}},{"id":"serverspoof","name":"server-spoof","className":"ServerSpoof","category":"misc","enabled":false,"config":{}},{"id":"soundblocker","name":"sound-blocker","className":"SoundBlocker","category":"misc","enabled":false,"config":{}},{"id":"spam","name":"spam","className":"Spam","category":"misc","enabled":false,"config":{}},{"id":"swarm","name":"swarm","className":"Swarm","category":"misc","enabled":false,"config":{}},{"id":"sneak","name":"Sneak","className":"Sneak","category":"movement","enabled":false,"config":{}},{"id":"airjump","name":"air-jump","className":"AirJump","category":"movement","enabled":false,"config":{}},{"id":"antivoid","name":"anti-void","className":"AntiVoid","category":"movement","enabled":false,"config":{}},{"id":"autojump","name":"auto-jump","className":"AutoJump","category":"movement","enabled":false,"config":{}},{"id":"autowalk","name":"auto-walk","className":"AutoWalk","category":"movement","enabled":false,"config":{}},{"id":"blink","name":"blink","className":"Blink","category":"movement","enabled":false,"config":{}},{"id":"clicktp","name":"click-tp","className":"ClickTP","category":"movement","enabled":false,"config":{}},{"id":"entitycontrol","name":"entity-control","className":"EntityControl","category":"movement","enabled":false,"config":{}},{"id":"fastclimb","name":"fast-climb","className":"FastClimb","category":"movement","enabled":false,"config":{}},{"id":"flight","name":"flight","className":"Flight","category":"movement","enabled":false,"config":{}},{"id":"guimove","name":"gui-move","className":"GUIMove","category":"movement","enabled":false,"config":{}},{"id":"highjump","name":"high-jump","className":"HighJump","category":"movement","enabled":false,"config":{}},{"id":"jesus","name":"jesus","className":"Jesus","category":"movement","enabled":false,"config":{}},{"id":"longjump","name":"long-jump","className":"LongJump","category":"movement","enabled":false,"config":{}},{"id":"nofall","name":"no-fall","className":"NoFall","category":"movement","enabled":false,"config":{}},{"id":"noslow","name":"no-slow","className":"NoSlow","category":"movement","enabled":false,"config":{}},{"id":"parkour","name":"parkour","className":"Parkour","category":"movement","enabled":false,"config":{}},{"id":"reversestep","name":"reverse-step","className":"ReverseStep","category":"movement","enabled":false,"config":{}},{"id":"safewalk","name":"safe-walk","className":"SafeWalk","category":"movement","enabled":false,"config":{}},{"id":"scaffold","name":"scaffold","className":"Scaffold","category":"movement","enabled":false,"config":{}},{"id":"slippy","name":"slippy","className":"Slippy","category":"movement","enabled":false,"config":{}},{"id":"sneak","name":"sneak","className":"Sneak","category":"movement","enabled":false,"config":{}},{"id":"spider","name":"spider","className":"Spider","category":"movement","enabled":false,"config":{}},{"id":"sprint","name":"sprint","className":"Sprint","category":"movement","enabled":false,"config":{}},{"id":"step","name":"step","className":"Step","category":"movement","enabled":false,"config":{}},{"id":"vanilla","name":"vanilla","className":"Vanilla","category":"movement","enabled":false,"config":{}},{"id":"nosoundlag","name":"no-sound-lag","className":"NoSoundLag","category":"player","enabled":false,"config":{}},{"id":"autoclicker","name":"auto-clicker","className":"AutoClicker","category":"player","enabled":false,"config":{}},{"id":"autoeat","name":"auto-eat","className":"AutoEat","category":"player","enabled":false,"config":{}},{"id":"autofish","name":"auto-fish","className":"AutoFish","category":"player","enabled":false,"config":{}},{"id":"autogap","name":"auto-gap","className":"AutoGap","category":"player","enabled":false,"config":{}},{"id":"automend","name":"auto-mend","className":"AutoMend","category":"player","enabled":false,"config":{}},{"id":"autoregear","name":"auto-regear","className":"AutoRegear","category":"player","enabled":false,"config":{}},{"id":"autotool","name":"auto-tool","className":"AutoTool","category":"player","enabled":false,"config":{}},{"id":"chestswap","name":"chest-swap","className":"ChestSwap","category":"player","enabled":false,"config":{}},{"id":"frecam","name":"freecam","className":"Freecam","category":"player","enabled":false,"config":{}},{"id":"ghosthand","name":"ghost-hand","className":"GhostHand","category":"player","enabled":false,"config":{}},{"id":"liquidinteract","name":"liquid-interact","className":"LiquidInteract","category":"player","enabled":false,"config":{}},{"id":"middleclickextra","name":"middle-click-extra","className":"MiddleClickExtra","category":"player","enabled":false,"config":{}},{"id":"multitask","name":"multi-task","className":"MultiTask","category":"player","enabled":false,"config":{}},{"id":"nobreakdelay","name":"no-break-delay","className":"NoBreakDelay","category":"player","enabled":false,"config":{}},{"id":"nominingslowdown","name":"no-mining-slowdown","className":"NoMiningSlowdown","category":"player","enabled":false,"config":{}},{"id":"noswing","name":"no-swing","className":"NoSwing","category":"player","enabled":false,"config":{}},{"id":"portalgodmode","name":"portal-god-mode","className":"PortalGodMode","category":"player","enabled":false,"config":{}},{"id":"potioneffects","name":"potion-effects","className":"PotionEffects","category":"player","enabled":false,"config":{}},{"id":"reach","name":"reach","className":"Reach","category":"player","enabled":false,"config":{}},{"id":"rotation","name":"rotation","className":"Rotation","category":"player","enabled":false,"config":{}},{"id":"speedmine","name":"speed-mine","className":"SpeedMine","category":"player","enabled":false,"config":{}},{"id":"xcarry","name":"x-carry","className":"XCarry","category":"player","enabled":false,"config":{}},{"id":"blockselection","name":"block-selection","className":"BlockSelection","category":"render","enabled":false,"config":{}},{"id":"breakindicators","name":"break-indicators","className":"BreakIndicators","category":"render","enabled":false,"config":{}},{"id":"breadcrumbs","name":"breadcrumbs","className":"Breadcrumbs","category":"render","enabled":false,"config":{}},{"id":"chams","name":"chams","className":"Chams","category":"render","enabled":false,"config":{}},{"id":"cityesp","name":"city-esp","className":"CityESP","category":"render","enabled":false,"config":{}},{"id":"entityowner","name":"entity-owner","className":"EntityOwner","category":"render","enabled":false,"config":{}},{"id":"esp","name":"esp","className":"ESP","category":"render","enabled":false,"config":{}},{"id":"freelook","name":"free-look","className":"FreeLook","category":"render","enabled":false,"config":{}},{"id":"fullbright","name":"fullbright","className":"Fullbright","category":"render","enabled":false,"config":{}},{"id":"handview","name":"hand-view","className":"HandView","category":"render","enabled":false,"config":{}},{"id":"holeesp","name":"hole-esp","className":"HoleESP","category":"render","enabled":false,"config":{}},{"id":"itemhighlight","name":"item-highlight","className":"ItemHighlight","category":"render","enabled":false,"config":{}},{"id":"itemphysics","name":"item-physics","className":"ItemPhysics","category":"render","enabled":false,"config":{}},{"id":"lightoverlay","name":"light-overlay","className":"LightOverlay","category":"render","enabled":false,"config":{}},{"id":"logoutspots","name":"logout-spots","className":"LogoutSpots","category":"render","enabled":false,"config":{}},{"id":"marker","name":"marker","className":"Marker","category":"render","enabled":false,"config":{}},{"id":"nametags","name":"nametags","className":"Nametags","category":"render","enabled":false,"config":{}},{"id":"norender","name":"no-render","className":"NoRender","category":"render","enabled":false,"config":{}},{"id":"popchams","name":"pop-chams","className":"PopChams","category":"render","enabled":false,"config":{}},{"id":"storageesp","name":"storage-esp","className":"StorageESP","category":"render","enabled":false,"config":{}},{"id":"timechanger","name":"time-changer","className":"TimeChanger","category":"render","enabled":false,"config":{}},{"id":"tracers","name":"tracers","className":"Tracers","category":"render","enabled":false,"config":{}},{"id":"trail","name":"trail","className":"Trail","category":"render","enabled":false,"config":{}},{"id":"tunnelesp","name":"tunnel-esp","className":"TunnelESP","category":"render","enabled":false,"config":{}},{"id":"voidesp","name":"void-esp","className":"VoidESP","category":"render","enabled":false,"config":{}},{"id":"wallhack","name":"wall-hack","className":"WallHack","category":"render","enabled":false,"config":{}},{"id":"xray","name":"xray","className":"Xray","category":"render","enabled":false,"config":{}},{"id":"zoom","name":"zoom","className":"Zoom","category":"render","enabled":false,"config":{}},{"id":"ambience","name":"ambience","className":"Ambience","category":"world","enabled":false,"config":{}},{"id":"autobreed","name":"auto-breed","className":"AutoBreed","category":"world","enabled":false,"config":{}},{"id":"autobrewer","name":"auto-brewer","className":"AutoBrewer","category":"world","enabled":false,"config":{}},{"id":"automount","name":"auto-mount","className":"AutoMount","category":"world","enabled":false,"config":{}},{"id":"autonametag","name":"auto-nametag","className":"AutoNametag","category":"world","enabled":false,"config":{}},{"id":"autoshearer","name":"auto-shearer","className":"AutoShearer","category":"world","enabled":false,"config":{}},{"id":"autosign","name":"auto-sign","className":"AutoSign","category":"world","enabled":false,"config":{}},{"id":"autosmelter","name":"auto-smelter","className":"AutoSmelter","category":"world","enabled":false,"config":{}},{"id":"buildheight","name":"build-height","className":"BuildHeight","category":"world","enabled":false,"config":{}},{"id":"collisions","name":"collisions","className":"Collisions","category":"world","enabled":false,"config":{}},{"id":"echestfarmer","name":"echest-farmer","className":"EChestFarmer","category":"world","enabled":false,"config":{}},{"id":"endermanlook","name":"enderman-look","className":"EndermanLook","category":"world","enabled":false,"config":{}},{"id":"excavator","name":"excavator","className":"Excavator","category":"world","enabled":false,"config":{}},{"id":"flamethrower","name":"flamethrower","className":"Flamethrower","category":"world","enabled":false,"config":{}},{"id":"highwaybuilder","name":"highway-builder","className":"HighwayBuilder","category":"world","enabled":false,"config":{}},{"id":"infinityminer","name":"infinity-miner","className":"InfinityMiner","category":"world","enabled":false,"config":{}},{"id":"liquidfiller","name":"liquid-filler","className":"LiquidFiller","category":"world","enabled":false,"config":{}},{"id":"mountbypass","name":"mount-bypass","className":"MountBypass","category":"world","enabled":false,"config":{}},{"id":"noghostblocks","name":"no-ghost-blocks","className":"NoGhostBlocks","category":"world","enabled":false,"config":{}},{"id":"nuker","name":"nuker","className":"Nuker","category":"world","enabled":false,"config":{}},{"id":"packetmine","name":"packet-mine","className":"PacketMine","category":"world","enabled":false,"config":{}},{"id":"spawnproofer","name":"spawn-proofer","className":"SpawnProofer","category":"world","enabled":false,"config":{}},{"id":"stashfinder","name":"stash-finder","className":"StashFinder","category":"world","enabled":false,"config":{}},{"id":"timer","name":"timer","className":"Timer","category":"world","enabled":false,"config":{}},{"id":"veinminer","name":"vein-miner","className":"VeinMiner","category":"world","enabled":false,"config":{}}]};const api={data:MeteorCompat,getModules:()=>MeteorCompat.modules,byCategory:(c)=>MeteorCompat.modules.filter(m=>m.category===c),toggle:(id,on)=>{const m=MeteorCompat.modules.find(x=>x.id===id);if(!m)return false;m.enabled=on??!m.enabled;return m.enabled;},config:(id,key,val)=>{const m=MeteorCompat.modules.find(x=>x.id===id);if(!m)return false;m.config[key]=val;return true;}};window.MeteorCompat=api;window.dispatchEvent(new CustomEvent('meteorcompat:ready',{detail:{modules:MeteorCompat.moduleCount}}));})();`;
+
+
+const GUI_RUNTIME = `(function(){
+if(window.__meteorGuiLoaded)return;window.__meteorGuiLoaded=true;
+const openKey='ShiftRight';
+const css=\"#meteor-gui{position:fixed;inset:40px auto auto 40px;width:420px;height:520px;background:rgba(10,14,22,.94);color:#e6edf3;border:1px solid #2f3d52;border-radius:10px;z-index:2147483647;font:12px/1.3 system-ui,sans-serif;display:none;box-shadow:0 10px 30px rgba(0,0,0,.45)}#meteor-gui *{box-sizing:border-box}#meteor-gui .bar{display:flex;align-items:center;justify-content:space-between;padding:8px 10px;border-bottom:1px solid #2f3d52;cursor:move;background:#111826;border-radius:10px 10px 0 0}#meteor-gui .body{display:grid;grid-template-columns:110px 1fr;height:calc(100% - 34px)}#meteor-gui .cats{border-right:1px solid #2f3d52;overflow:auto;padding:6px}#meteor-gui .cats button,#meteor-gui .mods button{width:100%;text-align:left;border:1px solid #2f3d52;background:#0d1420;color:#c9d1d9;padding:6px;border-radius:6px;margin:4px 0;cursor:pointer}#meteor-gui .cats button.active{background:#1f6feb;color:#fff}#meteor-gui .main{display:grid;grid-template-rows:1fr 145px}#meteor-gui .mods{overflow:auto;padding:8px}#meteor-gui .mods button.on{background:#238636;color:#fff}#meteor-gui .cfg{border-top:1px solid #2f3d52;padding:8px}#meteor-gui textarea{width:100%;height:76px;background:#0b0f16;color:#9df;border:1px solid #2f3d52;border-radius:6px;padding:6px}\";
+const st=document.createElement('style');st.textContent=css;document.documentElement.appendChild(st);
+const gui=document.createElement('div');gui.id='meteor-gui';gui.innerHTML=\"<div class='bar'><b>Meteor Compat (Eagler)</b><span>Right Shift</span></div><div class='body'><div class='cats'></div><div class='main'><div class='mods'></div><div class='cfg'><div id='mcfg-title'>Select a module</div><textarea id='mcfg-json' placeholder='Module config JSON'></textarea><button id='mcfg-save' style='margin-top:6px;border:1px solid #2f3d52;background:#1f6feb;color:#fff;padding:6px 10px;border-radius:6px;cursor:pointer'>Save Config</button></div></div></div>\";
+document.body.appendChild(gui);
+const api=window.MeteorCompat; if(!api||!api.data||!Array.isArray(api.data.modules)) return;
+let currentCat=(api.data.modules[0]&&api.data.modules[0].category)||'combat', selected=null;
+const cats=[...new Set(api.data.modules.map(m=>m.category))].sort();
+const catsEl=gui.querySelector('.cats'), modsEl=gui.querySelector('.mods'), title=gui.querySelector('#mcfg-title'), ta=gui.querySelector('#mcfg-json'), save=gui.querySelector('#mcfg-save');
+function renderCats(){catsEl.innerHTML='';cats.forEach(c=>{const b=document.createElement('button');b.textContent=c;b.className=c===currentCat?'active':'';b.onclick=()=>{currentCat=c;renderCats();renderMods();};catsEl.appendChild(b);});}
+function renderMods(){modsEl.innerHTML='';api.byCategory(currentCat).forEach(m=>{const b=document.createElement('button');b.className=m.enabled?'on':'';b.textContent=(m.enabled?'[ON] ':'[OFF] ')+m.name;b.onclick=()=>{api.toggle(m.id);renderMods();};b.oncontextmenu=(e)=>{e.preventDefault();selected=m;title.textContent='Config: '+m.name;ta.value=JSON.stringify(m.config||{},null,2);};modsEl.appendChild(b);});}
+save.onclick=()=>{if(!selected) return;try{const obj=JSON.parse(ta.value||'{}');Object.keys(selected.config||{}).forEach(k=>delete selected.config[k]);Object.assign(selected.config,obj);title.textContent='Config saved: '+selected.name;}catch(e){title.textContent='Invalid JSON';}};
+let dragging=false,ox=0,oy=0; const bar=gui.querySelector('.bar'); bar.addEventListener('mousedown',e=>{dragging=true;ox=e.clientX-gui.offsetLeft;oy=e.clientY-gui.offsetTop;}); window.addEventListener('mouseup',()=>dragging=false); window.addEventListener('mousemove',e=>{if(!dragging)return;gui.style.left=(e.clientX-ox)+'px';gui.style.top=(e.clientY-oy)+'px';gui.style.inset='auto';gui.style.position='fixed';});
+window.addEventListener('keydown',e=>{if(e.code===openKey){gui.style.display=gui.style.display==='none'?'block':'none';if(gui.style.display==='block'){renderCats();renderMods();}}});
+})();`;
+
+const logBox = document.getElementById('log');
+const zipInput = document.getElementById('zipInput');
+const injectBtn = document.getElementById('injectBtn');
+const log = (m) => { logBox.textContent += `${m}\n`; };
+zipInput.addEventListener('change', () => injectBtn.disabled = !zipInput.files.length);
+
+function u16(v,o){return v.getUint16(o,true)}
+function u32(v,o){return v.getUint32(o,true)}
+
+async function inflateRaw(uint8) {
+  if (typeof DecompressionStream === 'undefined') throw new Error('Browser missing DecompressionStream (deflate-raw) support.');
+  const ds = new DecompressionStream('deflate-raw');
+  const stream = new Blob([uint8]).stream().pipeThrough(ds);
+  return new Uint8Array(await new Response(stream).arrayBuffer());
+}
+
+async function extractHtmlFromZip(buf) {
+  const bytes = new Uint8Array(buf);
+  const dv = new DataView(buf);
+  let eocd = -1;
+  for (let i = bytes.length - 22; i >= Math.max(0, bytes.length - 0x10000 - 22); i--) {
+    if (u32(dv, i) === 0x06054b50) { eocd = i; break; }
+  }
+  if (eocd < 0) throw new Error('Invalid zip: EOCD not found.');
+
+  const cdOffset = u32(dv, eocd + 16);
+  const cdSize = u32(dv, eocd + 12);
+  let p = cdOffset;
+  const end = cdOffset + cdSize;
+
+  while (p < end) {
+    if (u32(dv, p) !== 0x02014b50) throw new Error('Invalid central directory header.');
+    const method = u16(dv, p + 10);
+    const compressedSize = u32(dv, p + 20);
+    const fileNameLen = u16(dv, p + 28);
+    const extraLen = u16(dv, p + 30);
+    const commentLen = u16(dv, p + 32);
+    const localOffset = u32(dv, p + 42);
+    const name = new TextDecoder().decode(bytes.slice(p + 46, p + 46 + fileNameLen));
+    p += 46 + fileNameLen + extraLen + commentLen;
+
+    if (!name.toLowerCase().endsWith('.html')) continue;
+
+    if (u32(dv, localOffset) !== 0x04034b50) throw new Error('Invalid local file header.');
+    const lfNameLen = u16(dv, localOffset + 26);
+    const lfExtraLen = u16(dv, localOffset + 28);
+    const dataStart = localOffset + 30 + lfNameLen + lfExtraLen;
+    const comp = bytes.slice(dataStart, dataStart + compressedSize);
+
+    let raw;
+    if (method === 0) raw = comp;
+    else if (method === 8) raw = await inflateRaw(comp);
+    else throw new Error(`Unsupported zip compression method: ${method}`);
+
+    return { name, text: new TextDecoder().decode(raw) };
+  }
+  throw new Error('No HTML file found in zip.');
+}
+
+function injectIntoIIFE(html) {
+  const needle = '}));';
+  const idx = html.lastIndexOf(needle);
+  if (idx < 0) throw new Error('Could not find target `}));` closure in HTML.');
+  return html.slice(0, idx) + '\n/* Meteor Compat Injection */\n' + METEOR_PAYLOAD + '\n' + GUI_RUNTIME + '\n' + html.slice(idx);
+}
+
+function download(name, text) {
+  const blob = new Blob([text], { type: 'text/html;charset=utf-8' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = name;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(a.href);
+}
+
+injectBtn.addEventListener('click', async () => {
+  try {
+    logBox.textContent = '';
+    const f = zipInput.files[0];
+    if (!f) throw new Error('Select a zip first.');
+    log(`Reading: ${f.name}`);
+    const { name, text } = await extractHtmlFromZip(await f.arrayBuffer());
+    log(`Found HTML: ${name}`);
+    const injected = injectIntoIIFE(text);
+    const outName = name.replace(/\.html?$/i, '') + '.meteor.injected.html';
+    download(outName, injected);
+    log(`Done. Downloaded: ${outName}`);
+  } catch (e) {
+    log(`Error: ${e.message || e}`);
+  }
+});
+</script>
+</body>
+</html>
